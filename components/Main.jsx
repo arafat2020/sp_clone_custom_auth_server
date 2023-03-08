@@ -4,9 +4,12 @@ import { truncateString } from "../lib/truncate";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import { TunContext } from "../provider/tuneprovider";
+import useMe from "../hooks/useMe";
+import { useRouter } from "next/router";
 
 function Main({ insert }) {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const router = useRouter()
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
   useEffect(() => {
     var myDiv = document.getElementsByClassName("main");
@@ -17,7 +20,9 @@ function Main({ insert }) {
     //   myDiv[0].scrollTo(0, myDiv[0].scrollHeight);
     // });
   }, []);
-  const { setSide } = useContext(TunContext);
+  const { setSide,session:ss,setsession } = useContext(TunContext);
+  const {me,err} = useMe({token:ss?.accessToken})
+  console.log(me,err);
   return (
     <div
       className={`w-[100%] sm:w-[70%] h-[100%] bg-[#0c0c0c] overflow-y-scroll scrollbar-hide main`}
@@ -34,24 +39,28 @@ function Main({ insert }) {
         <span className="text-green-500 text-3xl font-bold">Tune</span>
       </div>
       <div
-        onClick={() => {
-          signOut({ callbackUrl: "/login" });
+        onClick={async() => {
+          await localStorage.removeItem("sp_user_data")
+          await setsession(null)
+          router.push('/login')
         }}
         className="absolute top-3 right-3 flex glass glass_bg2 space-x-2 z-10 rounded-full sm:w-[200px] p-1"
       >
         <img
           className="w-[30px] h-[30px]  rounded-full border"
-          src={session && session.user.image}
+          src={me?.images[0].url}
           alt="img"
           loading="lazy"
         />
         <button
           className="text-white hidden sm:inline"
-          onClick={() => {
-            signOut({ callbackUrl: "/login" });
+          onClick={async() => {
+            await localStorage.removeItem("sp_user_data")
+            await setsession(null)
+            router.push('/login')
           }}
         >
-          {session && truncateString(session.user.name, 10)}
+          {me && truncateString(me.display_name, 10)}
         </button>
       </div>
       {/* <button id="scroll_down" className="absolute right-2 bottom-52 z-10 ">

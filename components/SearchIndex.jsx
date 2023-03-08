@@ -1,24 +1,24 @@
-import { useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useCategories from "../hooks/getCategories";
 import Card2 from "./Card2";
 import SearchIcon from "@mui/icons-material/Search";
 import useInitialSearch from "../hooks/initialSearch";
 import Initialreasult from "./Initialreasult";
 import { useRouter } from "next/router";
+import { TunContext } from "../provider/tuneprovider";
 
 export default function SearchIndex() {
   const router = useRouter()
-  const { data: session } = useSession();
+  const {session} = useContext(TunContext)
   const { category, loading, err } = useCategories({
-    token: session?.user?.accessToken,
+    token: session?.accessToken,
   });
   const [term, setTerm] = useState();
   const {
     initialReasult,
     loading: initailLD,
     err: initialErr,
-  } = useInitialSearch({ token: session?.user?.accessToken, term: term });
+  } = useInitialSearch({ token: session?.accessToken, term: term });
   const ref = useRef();
   useEffect(() => {
     // const yt_form = document.getElementById("yt_form");

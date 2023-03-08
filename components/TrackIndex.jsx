@@ -9,7 +9,7 @@ import CardLoader2 from "./sceletonLoader/CardLoader2";
 import WebPlayer from "./WebPlayer";
 
 function TrackIndex() {
-  const { data: session } = useSession();
+  const {  session } = useContext(TunContext);
 
   const { setPlist } = useContext(TunContext);
   const router = useRouter();
@@ -18,7 +18,7 @@ function TrackIndex() {
   const [uri, setUri] = useState(id);
 
   const { reomandation, loading, err } = useRecomandation({
-    token: session?.user?.accessToken,
+    token: session?.accessToken,
     id: uri ? uri : id,
   });
   const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);

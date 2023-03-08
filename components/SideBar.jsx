@@ -8,16 +8,20 @@ import useUSerPlayList from "../hooks/getUSerPlayList";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import PlayListLoader from "./sceletonLoader/PlayListLoader";
+import { useContext } from "react";
+import { TunContext } from "../provider/tuneprovider";
+import { LOGIN_URL_2 } from "../lib/spotify";
 
 
 
 function SideBar() {
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const {session} = useContext(TunContext)
   const { loading, err, playList } = useUSerPlayList({
-    token: session?.user?.accessToken,
+    token: session?.accessToken,
   });
-  // console.log(session);
+  console.log(session,LOGIN_URL_2);
   // if (!session) return () => router.push("/login");
 
   console.log( err )

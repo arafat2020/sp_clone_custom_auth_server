@@ -1,15 +1,16 @@
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import useCategory from "../hooks/getCategory";
 import useGenreSeed from "../hooks/getGenreSeed";
+import { TunContext } from "../provider/tuneprovider";
 import Card1 from "./Card1";
 
 function GenreIndex() {
-  const { data: session } = useSession();
+  const {session} = useContext(TunContext)
   const router = useRouter();
   const { id } = router.query;
   const { category, err, loading } = useCategory({
-    token: session?.user.accessToken,
+    token: session?.accessToken,
     name: id,
   });
   console.log(category, err);

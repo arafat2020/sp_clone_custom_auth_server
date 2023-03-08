@@ -11,8 +11,7 @@ import { Skeleton } from "@mui/material";
 import { TunContext } from "../provider/tuneprovider";
 
 function PLaylistIndex({ obj, loading }) {
-  const { setTrack } = useContext(TunContext);
-  const { data: session } = useSession();
+  const { setTrack,session } = useContext(TunContext);
   const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
   const totalDuration = () => {
     return obj?.tracks?.items.map((e) => {
@@ -20,7 +19,7 @@ function PLaylistIndex({ obj, loading }) {
     });
   };
   const { user, loading: userLD } = useGetUser({
-    token: session?.user?.accessToken,
+    token: session?.accessToken,
     userID: obj?.owner.id,
   });
   console.log(user, obj);

@@ -4,24 +4,24 @@ function useUSerPlayList({ token }) {
   const [playList, setPlaylist] = useState();
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
+  console.log(playList);
   useEffect(() => {
+    if (!token) return;
     async function loadPLaylist() {
       await spiApi.setAccessToken(token);
-      await spiApi
-          .getUserPlaylists()
-          .then((res) => {
-            console.log('pl',res);
-            setPlaylist(res.body.items);
-            setLoading(false);
-          })
-          .catch((err) => {
-            setErr(err);
-            // console.log(err);
-            setLoading(false);
-          });
+      try {
+        const { body, statusCode } = await spiApi.getUserPlaylists();
+        if (statusCode === 200) {
+          setPlaylist(body.items);
+          setLoading(false);
+        }
+      } catch (error) {
+        setLoading(false);
+        setErr(error);
+      }
     }
     loadPLaylist();
-  },[token]);
+  }, [token]);
   return {
     loading,
     err,

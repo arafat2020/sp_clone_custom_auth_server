@@ -1,15 +1,16 @@
 import { Skeleton } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import useSaved from "../hooks/getSaved";
+import { TunContext } from "../provider/tuneprovider";
 import Card3 from "./Card3";
 import CardLoader2 from "./sceletonLoader/CardLoader2";
 
 function LIbreryIndex() {
     const {push} = useRouter()
-  const { data: session } = useSession();
-  const { saved, loading } = useSaved({ token: session?.user?.accessToken });
+  const {  session } = useContext(TunContext);
+  const { saved, loading } = useSaved({ token: session?.accessToken });
   console.log(saved);
   return (
     <div className="w-full h-full overflow-y-scroll scrollbar-hide">

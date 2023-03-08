@@ -14,10 +14,12 @@ import useMyTopArtist from "../hooks/getMyTopArtists";
 import Card3 from "./Card3";
 
 function MainIndex() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const {session} = useContext(TunContext)
+
   const router = useRouter();
   const { played, err, loading, lenght } = useRecenlyPlayed({
-    token: session?.user.accessToken,
+    token: session?.accessToken,
   });
   const { setPlist } = useContext(TunContext);
   const {
@@ -25,21 +27,21 @@ function MainIndex() {
     err: newerr,
     loading: newld,
   } = useNewReleases({
-    token: session?.user.accessToken,
+    token: session?.accessToken,
   });
   const {
     featurePLaylist,
     err: fErr,
     loading: fLd,
   } = useFeaturedPlaylists({
-    token: session?.user.accessToken,
+    token: session?.accessToken,
   });
   const {
     toper,
     err: srErr,
     loading: topLD,
   } = useMyTopArtist({
-    token: session?.user.accessToken,
+    token: session?.accessToken,
   });
   // console.log(toper);
   // console.log(session);
