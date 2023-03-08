@@ -6,15 +6,7 @@ import SearchIndex from "../components/SearchIndex";
 import SideBar from "../components/SideBar";
 
 export default function Search() {
-  const { status } = useSession();
-  const router = useRouter()
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      const reDirect = () => router.push("/login");
-      reDirect();
-    }
-  }, [status]);
-
+  
   return (
     <div className="w-screen h-screen">
       <div className="w-full flex h-[100%]">
