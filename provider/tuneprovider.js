@@ -61,7 +61,7 @@ export const TuneProvider = ({ children }) => {
       }
     }
     main();
-  }, [session]);
+  }, []);
   useEffect(() => {
     if (!session) return;
     const interval = setInterval(() => {
