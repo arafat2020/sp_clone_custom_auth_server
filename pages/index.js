@@ -5,7 +5,6 @@ import Main from "../components/Main.jsx";
 import MainIndex from "../components/MainIndex.jsx";
 import SideBar from "../components/SideBar";
 export default function Home() {
-  const router = useRouter();
   
   console.log(process.env);
   return (
