@@ -26,7 +26,7 @@ export const TuneProvider = ({ children }) => {
           localStorage.getItem("sp_user_data")
       );
       // console.log("ctx", nData);
-      if (!nData  && !code  ) {
+      if (!nData  && !code && !session  ) {
         await setAuth("unauthenticated");
         setLd(false);
         // console.log("unathemticated",window.location.host);
@@ -43,7 +43,7 @@ export const TuneProvider = ({ children }) => {
               code: code,
             })
             .then(async(res) => {
-              localStorage.setItem("sp_user_data", JSON.stringify(res.data));
+              await localStorage.setItem("sp_user_data", JSON.stringify(res.data));
 
               // console.log('ctxres',res.data);
               await setsession(res.data);
@@ -61,7 +61,7 @@ export const TuneProvider = ({ children }) => {
       }
     }
     main();
-  }, []);
+  }, [session]);
   useEffect(() => {
     if (!session) return;
     const interval = setInterval(() => {
