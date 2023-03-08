@@ -1,17 +1,18 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import Main from "../../components/Main";
 import PLaylistIndex from "../../components/PLaylistIndex";
 import SideBar from "../../components/SideBar";
 import useGetPLayList from "../../hooks/getPLayList";
+import { TunContext } from "../../provider/tuneprovider";
 
 function Playlist() {
   const router = useRouter();
   const { id } = router.query;
-  const { data:session} = useSession()
+  const { session} = useContext(TunContext)
   const {playist,loading,err} = useGetPLayList({
-    token:session?.user.accessToken,
+    token:session?.accessToken,
     id:id
   })
 //   console.log((playist));
