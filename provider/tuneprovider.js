@@ -14,7 +14,7 @@ export const TuneProvider = ({ children }) => {
   const [data, setData] = useState();
   const [st, setSt] = useState();
   const [session, setsession] = useState();
-  const [auth,setAuth] = useState(false)
+  const [auth,setAuth] = useState()
   useEffect(() => {
     async function main() {
       setLd(true);
@@ -26,14 +26,13 @@ export const TuneProvider = ({ children }) => {
           localStorage.getItem("sp_user_data")
       );
       // console.log("ctx", nData);
-      if (nData === null && !code  ) {
-        await setAuth(false);
+      if (!nData  && !code  ) {
+        await setAuth("unauthenticated");
         setLd(false);
         // console.log("unathemticated",window.location.host);
       }
-      if (nData ) {
+      if (nData  ) {
         await setsession(nData);
-        await setAuth(true)
         setLd(false);
         return;
       }
@@ -48,7 +47,6 @@ export const TuneProvider = ({ children }) => {
 
               // console.log('ctxres',res.data);
               await setsession(res.data);
-              setAuth(true)
             })
             .catch((err) => {
               // console.log('ctxerr',err);

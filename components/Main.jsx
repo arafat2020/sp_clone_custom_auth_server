@@ -8,11 +8,11 @@ import useMe from "../hooks/useMe";
 import { useRouter } from "next/router";
 
 function Main({ insert }) {
-  const {auth} = useContext(TunContext)
+  const {auth,session} = useContext(TunContext)
   const router = useRouter()
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
   useEffect(() => {
-   if(!auth){
+   if(auth === "unauthenticated"  || !session){
     const redirect =()=> router.push('/login')
     return redirect()
    }
@@ -21,7 +21,7 @@ function Main({ insert }) {
     //   console.log(pix);
     //   myDiv[0].scrollTo(0, myDiv[0].scrollHeight);
     // });
-  }, []);
+  }, [auth]);
   const { setSide,session:ss,setsession } = useContext(TunContext);
   const {me,err} = useMe({token:ss?.accessToken})
   console.log(me,err);
