@@ -7,7 +7,6 @@ import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import AddIcon from "@mui/icons-material/Add";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import useUSerPlayList from "../hooks/getUSerPlayList";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import PlayListLoader from "./sceletonLoader/PlayListLoader";
 import { TunContext } from "../provider/tuneprovider";

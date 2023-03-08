@@ -14,7 +14,7 @@ function Main({ insert }) {
   useEffect(() => {
    if(auth === "unauthenticated"  || !session){
     const redirect =()=> router.push('/login')
-    return redirect()
+     redirect()
    }
     // document.getElementById("scroll_down").addEventListener("click", () => {
     //   let pix = 0 + 1;
