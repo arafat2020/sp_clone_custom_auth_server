@@ -12,7 +12,7 @@ function Login({ provider }) {
       const reDirect = () => router.push("/");
       reDirect();
     }
-  }, [auth]);
+  }, []);
   return (
     <div className="w-screen h-screen bg-black flex flex-col justify-center">
       <div className="flex flex-col items-center">
