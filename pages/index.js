@@ -5,14 +5,8 @@ import Main from "../components/Main.jsx";
 import MainIndex from "../components/MainIndex.jsx";
 import SideBar from "../components/SideBar";
 export default function Home() {
-  const { data: session, status } = useSession();
   const router = useRouter();
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      const reDirect = () => router.push("/login");
-      reDirect();
-    }
-  }, [status]);
+  
   console.log(process.env);
   return (
     <div className="w-screen h-screen">
