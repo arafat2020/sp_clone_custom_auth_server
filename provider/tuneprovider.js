@@ -26,12 +26,12 @@ export const TuneProvider = ({ children }) => {
           localStorage.getItem("sp_user_data")
       );
       // console.log("ctx", nData);
-      if (nData === null && !code && !session) {
+      if (!nData  && !code && !session) {
         setLd(false);
         if (window.location.host !== `${BASE_URL}/login`) router.push("/login");
         // console.log("unathemticated",window.location.host);
       }
-      if (nData !== null) {
+      if (nData) {
         await setsession(nData);
         setLd(false);
         return;
