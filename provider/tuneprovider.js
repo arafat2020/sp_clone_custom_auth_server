@@ -14,7 +14,7 @@ export const TuneProvider = ({ children }) => {
   const [data, setData] = useState();
   const [st, setSt] = useState();
   const [session, setsession] = useState();
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
     async function main() {
       setLd(true);
@@ -26,9 +26,9 @@ export const TuneProvider = ({ children }) => {
           localStorage.getItem("sp_user_data")
       );
       // console.log("ctx", nData);
-      if (nData === null && !code && window.location.host !== `${BASE_URL}/login` ) {
+      if (nData === null && !code) {
         setLd(false);
-        router.push('/login')
+        if (window.location.host !== `${BASE_URL}/login`) router.push("/login");
         // console.log("unathemticated",window.location.host);
       }
       if (nData !== null) {
@@ -98,7 +98,7 @@ export const TuneProvider = ({ children }) => {
         st,
         setSt,
         session,
-        setsession
+        setsession,
       }}
     >
       {ld ? <h2>loading...</h2> : children}
