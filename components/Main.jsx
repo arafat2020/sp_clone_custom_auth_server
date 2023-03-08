@@ -8,12 +8,14 @@ import useMe from "../hooks/useMe";
 import { useRouter } from "next/router";
 
 function Main({ insert }) {
-  // const { data: session } = useSession();
+  const {auth} = useContext(TunContext)
   const router = useRouter()
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
   useEffect(() => {
-    var myDiv = document.getElementsByClassName("main");
-    console.log(myDiv[0].scrollHeight);
+   if(!auth){
+    const redirect =()=> router.push('/login')
+    return redirect()
+   }
     // document.getElementById("scroll_down").addEventListener("click", () => {
     //   let pix = 0 + 1;
     //   console.log(pix);

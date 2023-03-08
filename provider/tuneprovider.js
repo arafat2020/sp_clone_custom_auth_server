@@ -14,7 +14,7 @@ export const TuneProvider = ({ children }) => {
   const [data, setData] = useState();
   const [st, setSt] = useState();
   const [session, setsession] = useState();
-  const router = useRouter();
+  const [auth,setAuth] = useState(false)
   useEffect(() => {
     async function main() {
       setLd(true);
@@ -26,13 +26,14 @@ export const TuneProvider = ({ children }) => {
           localStorage.getItem("sp_user_data")
       );
       // console.log("ctx", nData);
-      if (!nData  && !code && !session) {
+      if (nData === null && !code  ) {
+        await setAuth(false);
         setLd(false);
-        if (window.location.host !== `${BASE_URL}/login`) router.push("/login");
         // console.log("unathemticated",window.location.host);
       }
-      if (nData) {
+      if (nData ) {
         await setsession(nData);
+        await setAuth(true)
         setLd(false);
         return;
       }
@@ -42,11 +43,12 @@ export const TuneProvider = ({ children }) => {
             .post(`${SERVER_URL_$}/login`, {
               code: code,
             })
-            .then((res) => {
+            .then(async(res) => {
               localStorage.setItem("sp_user_data", JSON.stringify(res.data));
 
               // console.log('ctxres',res.data);
-              setsession(res.data);
+              await setsession(res.data);
+              setAuth(true)
             })
             .catch((err) => {
               // console.log('ctxerr',err);
@@ -98,7 +100,7 @@ export const TuneProvider = ({ children }) => {
         st,
         setSt,
         session,
-        setsession,
+        setsession
       }}
     >
       {ld ? <h2>loading...</h2> : children}
