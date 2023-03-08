@@ -14,9 +14,9 @@ import { TunContext } from "../provider/tuneprovider";
 
 function SideDrawer() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const {  session } = useContext(TunContext);
   const { loading, err, playList } = useUSerPlayList({
-    token: session?.user?.accessToken,
+    token: session?.accessToken,
   });
   const { setSide, side } = useContext(TunContext);
   return (
