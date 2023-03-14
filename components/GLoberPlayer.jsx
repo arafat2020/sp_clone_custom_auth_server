@@ -3,13 +3,12 @@ import React, { useContext, useState } from "react";
 import { TunContext } from "../provider/tuneprovider";
 import WebPlayer from "./WebPlayer";
 import SpotifyPlayer from "react-spotify-web-playback";
-import { useSession } from "next-auth/react";
 
 function GLoberPlayer() {
   const [mode, setMode] = useState("preview");
   const { track, setTrack } = useContext(TunContext);
   console.log(track);
-  const { data: session } = useSession();
+  const {  session } = useContext(TunContext);
   return (
     <div
       className={`w-screen absolute bottom-0 left-0 glass_bg2  ${
@@ -52,7 +51,7 @@ function GLoberPlayer() {
           <div className="w-full">
             <SpotifyPlayer
               styles={{ bgColor: "#242424" }}
-              token={session.user.accessToken}
+              token={session?.accessToken}
               uris={[`spotify:track:${track && track}`]}
             />
           </div>

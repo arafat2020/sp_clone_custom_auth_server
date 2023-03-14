@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import Test from "../components/Test";
 import { BASE_URL, SERVER_URL_$ } from "../lib/serverConfig";
 
 export const TunContext = createContext();
@@ -14,7 +15,7 @@ export const TuneProvider = ({ children }) => {
   const [data, setData] = useState();
   const [st, setSt] = useState();
   const [session, setsession] = useState();
-  const [auth,setAuth] = useState()
+  const [auth, setAuth] = useState();
   useEffect(() => {
     async function main() {
       setLd(true);
@@ -26,12 +27,12 @@ export const TuneProvider = ({ children }) => {
           localStorage.getItem("sp_user_data")
       );
       // console.log("ctx", nData);
-      if (!nData  && !code && !session  ) {
+      if (!nData && !code && !session) {
         await setAuth("unauthenticated");
         setLd(false);
         // console.log("unathemticated",window.location.host);
       }
-      if (nData  ) {
+      if (nData) {
         await setsession(nData);
         setLd(false);
         return;
@@ -42,8 +43,11 @@ export const TuneProvider = ({ children }) => {
             .post(`${SERVER_URL_$}/login`, {
               code: code,
             })
-            .then(async(res) => {
-              await localStorage.setItem("sp_user_data", JSON.stringify(res.data));
+            .then(async (res) => {
+              await localStorage.setItem(
+                "sp_user_data",
+                JSON.stringify(res.data)
+              );
 
               // console.log('ctxres',res.data);
               await setsession(res.data);
@@ -64,6 +68,11 @@ export const TuneProvider = ({ children }) => {
   }, []);
   useEffect(() => {
     if (!session) return;
+    // if ( Date.now() > session.expiresIn * 1000) {
+    //   localStorage.removeItem("sp_user_datasp_user_data");
+    //   setsession(null);
+    //   setAuth("unauthenticated");
+    // }
     const interval = setInterval(() => {
       setLd(true);
       axios
@@ -98,10 +107,10 @@ export const TuneProvider = ({ children }) => {
         st,
         setSt,
         session,
-        setsession
+        setsession,
       }}
     >
-      {ld ? <h2>loading...</h2> : children}
+      {ld ? <Test/> : children}
     </TunContext.Provider>
   );
 };
