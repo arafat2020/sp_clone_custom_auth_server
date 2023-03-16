@@ -1,14 +1,17 @@
-import React from "react";
-import Main from "../../components/Main";
-import SideBar from "../../components/SideBar";
-import TrackIndex from "../../components/TrackIndex";
+import React, { Suspense } from "react";
+const Main = React.lazy(() => import("../../components/Main"));
+import Test from "../../components/Test";
+const SideBar = React.lazy(() => import("../../components/SideBar"));
+const TrackIndex = React.lazy(()=>import("../../components/TrackIndex"));
 
 function Track() {
   return (
     <div className="w-screen h-screen">
       <div className="w-full flex h-[100%]">
-        <SideBar />
-        <Main insert={<TrackIndex/>}  />
+        <Suspense fallback={<Test/>}>
+          <SideBar />
+          <Main insert={<TrackIndex />} />
+        </Suspense>
       </div>
     </div>
   );
