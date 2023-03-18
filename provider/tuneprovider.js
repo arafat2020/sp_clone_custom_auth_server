@@ -89,7 +89,7 @@ export const TuneProvider = ({ children }) => {
           // console.log(err);
           setLd(false);
         });
-    }, (session.expiresIn - 60) * 1000);
+    }, (3600 - 60) * 1000);
 
     return () => clearInterval(interval);
   }, [session]);

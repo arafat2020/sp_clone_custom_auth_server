@@ -16,11 +16,23 @@ function Main({ insert }) {
     const redirect =()=> router.push('/login')
      redirect()
    }
-    // document.getElementById("scroll_down").addEventListener("click", () => {
-    //   let pix = 0 + 1;
-    //   console.log(pix);
-    //   myDiv[0].scrollTo(0, myDiv[0].scrollHeight);
-    // });
+   if(!session) return
+   const dateNow = session?.expiresIn
+   const intervalId = setInterval(() => {
+    console.log(Date.now() - dateNow);
+    if (Date.now() >= dateNow) {
+      // Token has expired, renew it
+     async function logout() {
+      await localStorage.removeItem("sp_user_data")
+          await setsession(null)
+          router.push('/login')
+     }
+     logout()
+    }
+  }, 1000); // Check token validity every second
+  
+  // Cleanup function to clear the interval when component unmounts
+  return () => clearInterval(intervalId);
   }, [auth]);
   const { setSide,session:ss,setsession } = useContext(TunContext);
   const {me,err} = useMe({token:ss?.accessToken})

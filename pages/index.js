@@ -6,7 +6,6 @@ const MainIndex = React.lazy(() => import("../components/MainIndex"));
 const SideBar = React.lazy(() => import("../components/SideBar"));
 import Test from "../components/Test.jsx";
 export default function Home() {
-  console.log(process.env);
   return (
     <div className="w-screen h-screen">
       <div className="w-full flex h-[100%]">
