@@ -21,11 +21,11 @@ function SideBar() {
   const { loading, err, playList } = useUSerPlayList({
     token: session?.accessToken,
   });
-  console.log(session,LOGIN_URL_2);
-  // if (!session) return () => router.push("/login");
+  // console.log(session,LOGIN_URL_2);
+  // // if (!session) return () => router.push("/login");
 
-  console.log( err )
-  console.log(playList,err,loading);
+  // console.log( err )
+  // console.log(playList,err,loading);
   return (
     <div className="hidden sm:inline sm:w-[30%] min-w-[189px] h-[100%] bg-black">
       <div className=" ml-5 mt-5 space-y-5">

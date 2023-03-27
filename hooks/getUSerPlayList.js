@@ -4,7 +4,7 @@ function useUSerPlayList({ token }) {
   const [playList, setPlaylist] = useState();
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
-  console.log(playList);
+  // console.log(playList);
   useEffect(() => {
     if (!token) return;
     async function loadPLaylist() {

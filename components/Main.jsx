@@ -19,7 +19,6 @@ function Main({ insert }) {
    if(!session) return
    const dateNow = session?.expiresIn
    const intervalId = setInterval(() => {
-    console.log(Date.now() - dateNow);
     if (Date.now() >= dateNow) {
       // Token has expired, renew it
      async function logout() {
@@ -36,7 +35,7 @@ function Main({ insert }) {
   }, [auth]);
   const { setSide,session:ss,setsession } = useContext(TunContext);
   const {me,err} = useMe({token:ss?.accessToken})
-  console.log(me,err);
+  // console.log(me,err);
   return (
     <div
       className={`w-[100%] sm:w-[70%] h-[100%] bg-[#0c0c0c] overflow-y-scroll scrollbar-hide main`}

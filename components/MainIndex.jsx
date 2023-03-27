@@ -15,7 +15,7 @@ import Card3 from "./Card3";
 
 function MainIndex() {
   // const { data: session } = useSession();
-  const {session} = useContext(TunContext)
+  const { session } = useContext(TunContext);
 
   const router = useRouter();
   const { played, err, loading, lenght } = useRecenlyPlayed({
@@ -43,12 +43,12 @@ function MainIndex() {
   } = useMyTopArtist({
     token: session?.accessToken,
   });
-  // console.log(toper);
+  // console.log(newReleas);
   // console.log(session);
   return (
     <div className="w-full">
       {!topLD ? (
-        <h1 className="text-xl  sm:text-2xl text-white font-sans font-bold sm:m-5 mt-9 ml-5" >
+        <h1 className="text-xl  sm:text-2xl text-white font-sans font-bold sm:m-5 mt-9 ml-5">
           {toper && "Your top Track"}
         </h1>
       ) : (
@@ -69,9 +69,10 @@ function MainIndex() {
           toper?.map((e) => {
             return (
               <div
+                className="cursor-pointer"
                 key={e.id}
                 onClick={() => {
-                  router.push(`/track/${e.track?.id}`);
+                  router.push(`/track/${e?.id}`);
                   setPlist(e.context == !null && e.context.uri);
                 }}
               >
@@ -145,7 +146,7 @@ function MainIndex() {
         ) : (
           newReleas?.map((e) => {
             return (
-              <div key={e.id} onClick={() => router.push(`/track/${e.id}`)}>
+              <div key={e.id} onClick={() => router.push(`/album/${e.id}`)}>
                 <Card1
                   key={e.id}
                   image={e.images[1].url}
@@ -168,7 +169,7 @@ function MainIndex() {
         ) : (
           featurePLaylist?.map((e) => {
             return (
-              <div key={e.id} onClick={()=>router.push(`/playlist/${e.id}`)}>
+              <div key={e.id} onClick={() => router.push(`/playlist/${e.id}`)}>
                 <Card1
                   key={e.id}
                   image={e.images[0].url}

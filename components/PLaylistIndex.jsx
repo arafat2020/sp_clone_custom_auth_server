@@ -11,13 +11,15 @@ import { Skeleton } from "@mui/material";
 import { TunContext } from "../provider/tuneprovider";
 
 function PLaylistIndex({ obj, loading }) {
-  const { setTrack,session } = useContext(TunContext);
+  const { setTrack, session } = useContext(TunContext);
   const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
   const totalDuration = () => {
-    return obj?.tracks?.items.map((e) => {
-      return e.track.duration_ms;
+    return obj?.tracks?.items.flatMap((e) => {
+      if (!e.track?.duration_ms) return []
+      return e.track?.duration_ms ;
     });
   };
+  console.log(totalDuration());
   const { user, loading: userLD } = useGetUser({
     token: session?.accessToken,
     userID: obj?.owner.id,
@@ -113,7 +115,9 @@ function PLaylistIndex({ obj, loading }) {
               ) : (
                 <>
                   <p className="text-white">
-                    <span className="sm:font-bold font-[12px]">{obj?.owner.display_name}</span>
+                    <span className="sm:font-bold font-[12px]">
+                      {obj?.owner.display_name}
+                    </span>
                     .
                     <span className="font-[10px]">
                       {obj?.tracks.total} Songs,
@@ -153,18 +157,18 @@ function PLaylistIndex({ obj, loading }) {
         {obj?.tracks.items.map((e, i) => {
           return (
             <div
-              key={e.track.id}
-              onClick={() => setTrack(e.track.id)}
+              key={e.track?.id}
+              onClick={() => setTrack(e.track?.id)}
               className="cursor-pointer"
             >
               <Card4
                 key={e.id}
                 index={0 + i}
-                title={e.track.name}
-                subtitle={e.track.artists[0].name}
-                url={e.track.album.images[2]?.url}
-                album={e.track.album.name}
-                time={e.track.duration_ms}
+                title={e.track?.name}
+                subtitle={e.track?.artists[0].name}
+                url={e.track?.album.images[2]?.url}
+                album={e.track?.album.name}
+                time={e.track?.duration_ms}
               />
             </div>
           );
