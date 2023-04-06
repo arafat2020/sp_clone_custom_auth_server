@@ -6,6 +6,7 @@ export default function useSearch({ token, term, limit = 10, offset = 0 }) {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
   useEffect(() => {
+    if (!token && !term) return;
     async function LoadSearch() {
       setLoading(true);
       await spiApi.setAccessToken(token);
@@ -13,12 +14,11 @@ export default function useSearch({ token, term, limit = 10, offset = 0 }) {
         .searchTracks(term, { limit: limit, offset: offset })
         .then((res) => {
           setTrackReasult(res.body.tracks.items);
-          setLoading(false);
         })
         .catch((err) => {
           setErr(err);
-          setLoading(false);
-        });
+        })
+        .finally(() => setLoading(false));
     }
     LoadSearch();
   }, [token, term]);

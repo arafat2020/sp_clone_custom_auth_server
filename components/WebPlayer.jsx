@@ -1,8 +1,7 @@
-import { useSession } from "next-auth/react";
 import React from "react";
 import SpotifyPlayer from 'react-spotify-player';
 function WebPlayer({uri}) {
-  const { data: session } = useSession();
+
   const size = {
     width: "100%",
     height: "100px",

@@ -8,8 +8,7 @@ function useInitialSearch({ token, limit = 4, offset = 0, term }) {
   useEffect(() => {
     setLoading(true);
     const debounce = setTimeout(() => {
-      token &&
-        term &&
+      if(!token && !term) term
         axios
           .get(
             `https://api.spotify.com/v1/search?q=${term}&type=track%2Cartist%2Cplaylist%2Calbum&market=US&limit=${limit}&offset=${offset}`,

@@ -7,6 +7,7 @@ function useCategory({ token,name }) {
   const [err, setErr] = useState(null);
   useEffect(() => {
     async function loader() {
+      if(!token && !name) return
       token && (await spiApi.setAccessToken(token));
       token && name &&
         (await spiApi

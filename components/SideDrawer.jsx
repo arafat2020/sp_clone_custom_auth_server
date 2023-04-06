@@ -20,7 +20,7 @@ function SideDrawer() {
   const { setSide, side } = useContext(TunContext);
   return (
     <div>
-      <SwipeableDrawer anchor="left" onClose={() => setSide(false)} open={side}>
+      <SwipeableDrawer anchor="left" onClose={() => setSide(false)} open={side} onOpen={() => setSide(true)}>
         <div className=" w-[30%] min-w-[189px] h-[100%] bg-black">
           <div className=" ml-5 mt-5 space-y-5">
             <h1>

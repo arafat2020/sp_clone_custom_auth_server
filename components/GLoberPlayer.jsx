@@ -44,7 +44,7 @@ function GLoberPlayer() {
       <div className="flex flex-wrap items-center w-full overflow-x-scroll scrollbar-hide justify-around">
         {mode === "preview" && (
           <div className="w-[95%]">
-            <WebPlayer uri={`spotify:track:${track && track}`} />
+            {track && <WebPlayer uri={`spotify:track:${track && track}`} />}
           </div>
         )}
         {mode !== "preview" && (

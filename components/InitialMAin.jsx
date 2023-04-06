@@ -1,8 +1,10 @@
+import { useRouter } from "next/router";
 import React from "react";
 import Card1 from "./Card1";
 import Card3 from "./Card3";
 
 function InitialMAin({ Initialreasult }) {
+  const router = useRouter()
   return (
     <div className="w-full">
       <div className="w-full mt-4 flex sm:flex-row flex-col sm:justify-evenly items-center">
@@ -80,14 +82,16 @@ function InitialMAin({ Initialreasult }) {
           {Initialreasult &&
             Initialreasult.albums?.items.map((e) => {
               return (
-                <Card1
-                  key={e.id}
-                  image={e.images[1]?.url && e.images[1].url}
-                  title={e.name}
-                  subtitle={`${e.release_date.split("-")[0]}${` . `}${
-                    e.artists[0].name
-                  }`}
-                />
+                <div key={e.id} onClick={()=>router.push(`/album/${e.id}`)}>
+                  <Card1
+                    key={e.id}
+                    image={e.images[1]?.url && e.images[1].url}
+                    title={e.name}
+                    subtitle={`${e.release_date.split("-")[0]}${` . `}${
+                      e.artists[0].name
+                    }`}
+                  />
+                </div>
               );
             })}
         </div>

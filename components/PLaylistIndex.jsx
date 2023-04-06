@@ -19,7 +19,7 @@ function PLaylistIndex({ obj, loading }) {
       return e.track?.duration_ms ;
     });
   };
-  console.log(totalDuration());
+  // console.log(totalDuration());
   const { user, loading: userLD } = useGetUser({
     token: session?.accessToken,
     userID: obj?.owner.id,

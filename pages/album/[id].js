@@ -20,7 +20,7 @@ function Album() {
       <div className="w-full flex h-[100%]">
         <Suspense fallback={<Test />}>
           <SideBar />
-          <Main insert={<AlbamIndex obj={album} loading={loading}/>}/>
+          <Main insert={<AlbamIndex obj={album} loading={loading} token={session?.accessToken}/> }/>
         </Suspense>
       </div>
     </div>

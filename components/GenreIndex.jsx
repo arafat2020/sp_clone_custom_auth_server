@@ -13,7 +13,7 @@ function GenreIndex() {
     token: session?.accessToken,
     name: id,
   });
-  console.log(category, err);
+  // console.log(category, err);
   return (
     <div className="w-full h-full overflow-y-scroll scrollbar-hide">
       <h2 className="text-xl text-white font-sans font-bold sm:m-5 mt-9 ml-3">

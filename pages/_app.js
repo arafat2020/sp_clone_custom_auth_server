@@ -1,20 +1,20 @@
 import { TuneProvider } from "../provider/tuneprovider";
-import { SessionProvider } from "next-auth/react";
 
 import "../styles/globals.css";
 import GLoberPlayer from "../components/GLoberPlayer";
 import SideDrawer from "../components/SideDrawer";
+import ErrorBoundry from "../error/ErrorBoundry";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   console.log(session);
   return (
-    <SessionProvider session={session}>
+    <ErrorBoundry>
       <TuneProvider>
         <Component {...pageProps} />
-        <GLoberPlayer/>
-        <SideDrawer/>
+        <GLoberPlayer />
+        <SideDrawer />
       </TuneProvider>
-    </SessionProvider>
+    </ErrorBoundry>
   );
 }
 

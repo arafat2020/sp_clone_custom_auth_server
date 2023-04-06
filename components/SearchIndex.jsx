@@ -29,7 +29,7 @@ export default function SearchIndex() {
     //   }
     // });
   },[]);
-  console.log(category);
+  // console.log(category);
   return (
     <div className="w-full">
       <div className="bg-white w-1/2 p-1 rounded-full ml-4 sm:mt-3 mt-11 flex">

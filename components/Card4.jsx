@@ -3,7 +3,7 @@ import { formatTIme } from "../lib/formatTIme";
 import { truncateString } from "../lib/truncate";
 import Card3 from "./Card3";
 
-function Card4({url,title,subtitle,album='something',time=4.5,index}) {
+function Card4({url,title,subtitle,album,time=4.5,index}) {
   return (
     <div className="w-full flex justify-between p-3">
       <div className="flex items-center w-[45%]">
