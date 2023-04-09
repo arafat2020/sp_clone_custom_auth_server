@@ -96,6 +96,7 @@ export const TuneProvider = ({ children }) => {
   return (
     <TunContext.Provider
       value={{
+        auth,
         plist,
         setPlist,
         track,
